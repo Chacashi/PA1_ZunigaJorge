@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody _compRigidbody;
     [SerializeField] private float forceJump;
-
+    bool aux=true;
     float horizontal;
     float vertical;
     [SerializeField]  float speed;
@@ -19,9 +19,10 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-       if(Input.GetKeyDown(KeyCode.Space))
+       if(Input.GetKeyDown(KeyCode.Space) && aux==true)
         {
             _compRigidbody.AddForce(new Vector3(0f, forceJump, 0f), ForceMode.Impulse);
+            aux = false;
         }
 
     }
@@ -31,6 +32,14 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other)
+        {
+            aux = true;
+            
+        }
+    }
 
 
 
